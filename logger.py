@@ -3,6 +3,7 @@ class Logger(object):
     # TODO: Write a test suite for this class to make sure each method is working
     # as expected.
 
+
     # PROTIP: Write your tests before you solve each function, that way you can
     # test them one by one as you write your class.
 
@@ -17,6 +18,7 @@ class Logger(object):
         The simulation class should use this method immediately to log the specific
         parameters of the simulation as the first line of the file.
         '''
+
         # TODO: Finish this method. This line of metadata should be tab-delimited
         # it should create the text file that we will store all logs in.
         # TIP: Use 'w' mode when you open the file. For all other methods, use

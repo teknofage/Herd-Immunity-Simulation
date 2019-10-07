@@ -31,11 +31,21 @@ class Simulation(object):
         '''
         # TODO: Create a Logger object and bind it to self.logger.
         # Remember to call the appropriate logger method in the corresponding parts of the simulation.
+<<<<<<< HEAD
     def logger(self):
+=======
+
+>>>>>>> e9583187875835eaf38cc009c6a4b152b1119441
         # TODO: Call self._create_population() and pass in the correct parameters.
+
         # Store the array that this method will return in the self.population attribute.
+<<<<<<< HEAD
         self._create_population(population)
+=======
+
+>>>>>>> e9583187875835eaf38cc009c6a4b152b1119441
         # TODO: Store each newly infected person's ID in newly_infected attribute.
+
         # At the end of each time step, call self._infect_newly_infected()
         # and then reset .newly_infected back to an empty list.
         self.logger = None
@@ -51,7 +61,7 @@ class Simulation(object):
         self.file_name = "{}_simulation_pop_{}_vp_{}_infected_{}.txt".format(
             virus_name, population_size, vacc_percentage, initial_infected)
         self.newly_infected = []
-
+        
     def _create_population(self, initial_infected):
         '''This method will create the initial population.
             Args:
@@ -99,7 +109,7 @@ class Simulation(object):
         while should_continue:
         # TODO: for every iteration of this loop, call self.time_step() to compute another
         # round of this simulation.
-        print('The simulation has ended after {time_step_counter} turns.'.format(time_step_counter))
+            print('The simulation has ended after {time_step_counter} turns.'.format(time_step_counter))
         pass
 
     def time_step(self):

@@ -1,3 +1,5 @@
+import os # os allows you to work with files and system commnds
+
 class Logger(object):
     ''' Utility class responsible for logging all interactions during the simulation. '''
     # TODO: Write a test suite for this class to make sure each method is working
@@ -25,7 +27,30 @@ class Logger(object):
         # the 'a' mode to append a new log to the end, since 'w' overwrites the file.
         # NOTE: Make sure to end every line with a '/n' character to ensure that each
         # event logged ends up on a separate line!
-        pass
+
+        # create a text file
+        log = open("log.txt", 'w+')
+        log.close()
+
+        # logadd appends text file
+        logadd = open('log.txt', 'a+')
+
+        #these commands write to logadd
+        logadd.write(pop_size +'\n')
+        logadd.write(vacc_percentage + '\n')
+        logadd.write(virus_name + '\n')
+        logadd.write(mortality_rate + '\n')
+        logadd.write(basic_repro_num +'\n')
+
+
+
+        #     file.write("hello! \n")
+        #
+        # file.open()
+        # file.close()
+        #
+        # print("sadas")
+        # pass
 
     def log_interaction(self, person, random_person, random_person_sick=None,
                         random_person_vacc=None, did_infect=None):

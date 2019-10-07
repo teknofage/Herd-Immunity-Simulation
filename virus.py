@@ -19,3 +19,13 @@ def test_virus_instantiation():
     assert virus.name == "Cercopithecine herpesvirus"
     assert virus.repro_rate == 0.5
     assert virus.mortality_rate == 0.2
+
+   virus = Virus("Purple Sock Fiend Virus", 0.5, 0.9)
+   assert virus.name == "Purple Sock Fiend Virus"
+   assert virus.repro_rate == 0.5
+   assert virus.mortality_rate == 0.9
+
+   virus = Virus("Elephantitis Hemorrhoids", 0.2, 0.9)
+   assert virus.name == "Elephantitis Hemorrhoids"
+   assert virus.repro_rate == 0.2
+   assert virus.mortality_rate == 0.9

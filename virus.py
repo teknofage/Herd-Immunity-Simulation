@@ -14,3 +14,17 @@ def test_virus_instantiation():
     assert virus.name == "HIV"
     assert virus.repro_rate == 0.8
     assert virus.mortality_rate == 0.3
+
+
+def test_purple_sock_fiend_virus_instantiation():
+    virus = Virus("Purple Sock Fiend Virus", 0.5, 0.9)
+    assert virus.name == "Purple Sock Fiend Virus"
+    assert virus.repro_rate == 0.5
+    assert virus.mortality_rate == 0.9
+    
+    
+def test_elephantitis_hemorrhiods_virus_instantiation():
+    virus = Virus("Elephantitis Hemorrhoids", 0.2, 0.9)
+    assert virus.name == "Elephantitis Hemorrhoids"
+    assert virus.repro_rate == 0.2
+    assert virus.mortality_rate == 0.9

@@ -31,37 +31,37 @@ class Simulation(object):
         '''
         # TODO: Create a Logger object and bind it to self.logger.
         # Remember to call the appropriate logger method in the corresponding parts of the simulation.
-<<<<<<< HEAD
-    def logger(self):
-=======
-
->>>>>>> e9583187875835eaf38cc009c6a4b152b1119441
         # TODO: Call self._create_population() and pass in the correct parameters.
 
         # Store the array that this method will return in the self.population attribute.
-<<<<<<< HEAD
-        self._create_population(population)
-=======
 
->>>>>>> e9583187875835eaf38cc009c6a4b152b1119441
+
+
         # TODO: Store each newly infected person's ID in newly_infected attribute.
+
+
 
         # At the end of each time step, call self._infect_newly_infected()
         # and then reset .newly_infected back to an empty list.
-        self.logger = None
-        self.population = [] # List of Person objects
+        self.logger = Logger('log.txt')
+        self.vacc_pop = []
+        self.unvacc_pop = []
+        self.totalvacc = int(vacc_percentage*self.pop_size)
+        self.population = self._create_population(initial_infected) # List of Person objects
         self.pop_size = pop_size # Int
         self.next_person_id = 0 # Int
         self.virus = virus # Virus object
         self.initial_infected = initial_infected # Int
-        self.total_infected = 0 # Int
-        self.current_infected = 0 # Int
+        self.total_infected = initial_infected # Int
+        self.current_infected = self.initial_infected # Int  # <--What is going on here?
         self.vacc_percentage = vacc_percentage # float between 0 and 1
         self.total_dead = 0 # Int
         self.file_name = "{}_simulation_pop_{}_vp_{}_infected_{}.txt".format(
             virus_name, population_size, vacc_percentage, initial_infected)
         self.newly_infected = []
-        
+        self._infect_newly_infected()
+        #self.time_step_counter
+
     def _create_population(self, initial_infected):
         '''This method will create the initial population.
             Args:

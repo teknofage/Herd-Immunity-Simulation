@@ -37,14 +37,7 @@ class Person(object):
                     self.is_vaccinated = True
                     self.infection = None
                     return True
-<<<<<<< HEAD
-
-
-=======
                     #person lives and becomes vaccinated
-        
-        
->>>>>>> 6f34a5fccacb531f452ca5e535f70e16c56a8a50
 
 
 ''' These are simple tests to ensure that you are instantiating your Person class correctly. '''

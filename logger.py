@@ -110,7 +110,7 @@ class Logger(object):
         elif did_die_from_infection == False:
             print (f"{person} lived.")
         # in not dead = survived infection
-        pass
+        
 
     # def log_time_step(self, time_step_number):
     #     ''' STRETCH CHALLENGE DETAILS:

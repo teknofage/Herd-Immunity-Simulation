@@ -103,7 +103,7 @@ class Logger(object):
 
         #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         with open(self.log.txt, "a") as log:
-        
+
         if did_die_from_infection == True:
             print(f"{person} died.")
         # is dead = person died

@@ -60,27 +60,35 @@ class Simulation(object):
             virus_name, population_size, vacc_percentage, initial_infected)
         self.newly_infected = []
         self._infect_newly_infected()
+        self.logger.write_metadata(pop_size, vacc_percentage, virus_name, mortality_rate)
         #self.time_step_counter
 
-    def _create_population(self, initial_infected):
-        '''This method will create the initial population.
-            Args:
-                initial_infected (int): The number of infected people that the simulation
-                will begin with.
+    # def _create_population(self, initial_infected):
+    #     '''This method will create the initial population.
+    #         Args:
+    #             initial_infected (int): The number of infected people that the simulation
+    #             will begin with.
+    #
+    #         Returns:
+    #             list: A list of Person objects.
+    #
+    #     '''
+    #     # TODO: Finish this method!  This method should be called when the simulation
+    #     # begins, to create the population that will be used. This method should return
+    #     # an array filled with Person objects that matches the specifications of the
+    #     # simulation (correct number of people in the population, correct percentage of
+    #     # people vaccinated, correct number of initially infected people).
+    #
+    #     # Use the attributes created in the init method to create a population that has
+    #     # the correct intial vaccination percentage and initial infected.
+    #     population = []
+    #
+    #     for index in rango(0, pop_size):
+    #         vaccinated = False
+    #         vaccinated_pop = random.randint(0,pop_size-1)
+    #
+    #
 
-            Returns:
-                list: A list of Person objects.
-
-        '''
-        # TODO: Finish this method!  This method should be called when the simulation
-        # begins, to create the population that will be used. This method should return
-        # an array filled with Person objects that matches the specifications of the
-        # simulation (correct number of people in the population, correct percentage of
-        # people vaccinated, correct number of initially infected people).
-
-        # Use the attributes created in the init method to create a population that has
-        # the correct intial vaccination percentage and initial infected.
-        pass
 
     def _simulation_should_continue(self):
         ''' The simulation should only end if the entire population is dead
@@ -90,7 +98,12 @@ class Simulation(object):
                 bool: True for simulation should continue, False if it should end.
         '''
         # TODO: Complete this helper method.  Returns a Boolean.
-        pass
+        if self.pop_size == 0 or self.vacc_percentage == 100:
+            should_continue = False
+        else:
+            should_continue = True
+        return should_continue
+
 
     def run(self):
         ''' This method should run the simulation until all requirements for ending

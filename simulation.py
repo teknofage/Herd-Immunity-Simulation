@@ -90,13 +90,16 @@ class Simulation(object):
         is_infected = numpy.random.choice(range(1, (self.pop_size) + 1), inital_infected, replace=False)
 
         for index in range(self.pop_size):
-            vaccinated = False
-            vacc_pop = random.randint(0,pop_size-1)
             person = Person(i+1, False, None)
             self.population.append(person)
             if (vacc_pop <= pop_size * vacc_percentage):
                 vaccinated = True
-            if (is_infected )
+            else vaccinated = False
+                self.is_vacc.append(person)
+            if (is_infected >= pop_size * vacc_percentage):
+                infected = True
+                else infected = False
+                self.is_infected.append(person)
 
         return population
 
@@ -136,8 +139,9 @@ class Simulation(object):
         while should_continue:
         # TODO: for every iteration of this loop, call self.time_step() to compute another
         # round of this simulation.
-            time_step_counter +=1
             self.time_step()
+            self.logger.log_time_step()
+            time_step_counter +=1
             should_continue = self._simulation_should_continue()
         print('The simulation has ended after {time_step_counter} turns.'.format(time_step_counter))
 
@@ -155,7 +159,15 @@ class Simulation(object):
                 increment interaction counter by 1.
             '''
         # TODO: Finish this method.
-        pass
+        for infected in self.population:
+            if infected.infection != None:
+                interactions = 0
+                while interactions < 100:
+                    rng = random.randint(0, self.pop_size)
+                    if self.population[rng].is_alive == True:
+                        interactions +=1
+                        self.interaction(infected, self.population[rng])
+                        
 
     def interaction(self, person, random_person):
         '''This method should be called any time two living people are selected for an

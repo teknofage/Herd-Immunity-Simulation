@@ -4,7 +4,7 @@ from person import Person
 from logger import Logger
 from virus import Virus
 import numpy as numpy
-#Hi FAT PAT
+#Dont call me fat.
 
 
 class Simulation(object):

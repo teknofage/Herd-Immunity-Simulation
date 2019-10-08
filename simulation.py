@@ -69,25 +69,25 @@ class Simulation(object):
             Args:
                 initial_infected (int): The number of infected people that the simulation
                 will begin with.
-    
+
             Returns:
                 list: A list of Person objects.
-    
+
         '''
         # TODO: Finish this method!  This method should be called when the simulation
         # begins, to create the population that will be used. This method should return
         # an array filled with Person objects that matches the specifications of the
         # simulation (correct number of people in the population, correct percentage of
         # people vaccinated, correct number of initially infected people).
-    
+
         # Use the attributes created in the init method to create a population that has
         # the correct intial vaccination percentage and initial infected.
         population = []
-        
+
         number_vaccinated = round(self.vacc_percentage * self.pop_size)
         is_vacc = numpy.random.choice(range(1, (self.pop_size) + 1), amount_vaccinated, replace=False)
         is_infected = numpy.random.choice(range(1, (self.pop_size) + 1), inital_infected, replace=False)
-        
+
         for index in range(self.pop_size):
             vaccinated = False
             vacc_pop = random.randint(0,pop_size-1)
@@ -96,9 +96,10 @@ class Simulation(object):
             if (vacc_pop <= pop_size * vacc_percentage):
                 vaccinated = True
             if (is_infected )
-    
+
         return population
-    
+
+
 
 
     def _simulation_should_continue(self):
@@ -138,7 +139,7 @@ class Simulation(object):
             self.time_step()
             should_continue = self._simulation_should_continue()
         print('The simulation has ended after {time_step_counter} turns.'.format(time_step_counter))
-        
+
 
     def time_step(self):
         ''' This method should contain all the logic for computing one time step

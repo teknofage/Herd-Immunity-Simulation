@@ -102,9 +102,15 @@ class Logger(object):
         # Append the results of the infection to the logfile
 
         #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        with open(self.log.txt, "a") as log:
+
+        if did_die_from_infection == True:
+            print(f"{person} died.")
         # is dead = person died
+        elif did_die_from_infection == False:
+            print (f"{person} lived.")
         # in not dead = survived infection
-        pass
+        
 
     # def log_time_step(self, time_step_number):
     #     ''' STRETCH CHALLENGE DETAILS:

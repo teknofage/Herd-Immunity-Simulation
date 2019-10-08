@@ -87,7 +87,6 @@ class Simulation(object):
         for index in range(pop_size):
             vaccinated = False
             vacc_pop = random.randint(0,pop_size-1)
-<<<<<<< HEAD
             person = Person(i+1, False, None)
             self.population.append(person)
             if (vacc_pop <= pop_size * vacc_percentage):
@@ -97,12 +96,6 @@ class Simulation(object):
     
         return population
     
-=======
-            if(vacc_pop <= pop_size
-
-            population.append(Person(index,vaccinated))
-
->>>>>>> c21f46268fa7e97591a22a490dd2ce992e07456e
 
 
     def _simulation_should_continue(self):

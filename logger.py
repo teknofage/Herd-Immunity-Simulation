@@ -44,14 +44,6 @@ class Logger(object):
 
 
 
-        #     file.write("hello! \n")
-        #
-        # file.open()
-        # file.close()
-        #
-        # print("sadas")
-        # pass
-
     def log_interaction(self, person, random_person, random_person_sick=None,
                         random_person_vacc=None, did_infect=None):
         '''
@@ -67,7 +59,41 @@ class Logger(object):
         # represent all the possible edge cases. Use the values passed along with each person,
         # along with whether they are sick or vaccinated when they interact to determine
         # exactly what happened in the interaction and create a String, and write to your logfile.
-        pass
+
+        #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        #Case responces: is vacc, is already infected, is infected, is not infected
+        with open(self.log.txt, "a") as logs:
+            #1: person infected random_person.
+            if random_person_sick == False and not random_person_vacc:
+                did_infect == True
+                random_person_sick == True
+                print(f"{random_person} got infected by {person}")
+
+            #2: person didn't infect random_person because they are is_vaccinated.
+            elif random_person_vacc == True:
+                print(f"{person} did not infect {random_person} because they are vaccinated")
+                did_infect == False
+                random_person_sick == False
+
+            #3: person didn't infect random_person because they were already infected.
+
+            elif random_person_vacc == True:
+                print(f"{person} did not infect {random_person} because they are already infected")
+                did_infect == False
+                random_person_sick == True
+
+                #4: person didn't infect random_person just cause.
+            elif random_person_vacc == False and random_person:
+                did_infect == False
+                random_person_sick == False
+                print(f"{random_person} did not get infected.")
+
+
+
+
+        #4: person didn't infect random_person just cause.
+        #add booleans
+
 
     def log_infection_survival(self, person, did_die_from_infection):
         ''' The Simulation object uses this method to log the results of every
@@ -79,23 +105,27 @@ class Logger(object):
         # TODO: Finish this method. If the person survives, did_die_from_infection
         # should be False.  Otherwise, did_die_from_infection should be True.
         # Append the results of the infection to the logfile
+
+        #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        # is dead = person died
+        # in not dead = survived infection
         pass
 
-    def log_time_step(self, time_step_number):
-        ''' STRETCH CHALLENGE DETAILS:
-
-        If you choose to extend this method, the format of the summary statistics logged
-        are up to you.
-
-        At minimum, it should contain:
-            The number of people that were infected during this specific time step.
-            The number of people that died on this specific time step.
-            The total number of people infected in the population, including the newly infected
-            The total number of dead, including those that died during this time step.
-
-        The format of this log should be:
-            "Time step {time_step_number} ended, beginning {time_step_number + 1}\n"
-        '''
+    # def log_time_step(self, time_step_number):
+    #     ''' STRETCH CHALLENGE DETAILS:
+    #
+    #     If you choose to extend this method, the format of the summary statistics logged
+    #     are up to you.
+    #
+    #     At minimum, it should contain:
+    #         The number of people that were infected during this specific time step.
+    #         The number of people that died on this specific time step.
+    #         The total number of people infected in the population, including the newly infected
+    #         The total number of dead, including those that died during this time step.
+    #
+    #     The format of this log should be:
+    #         "Time step {time_step_number} ended, beginning {time_step_number + 1}\n"
+    #     '''
         # TODO: Finish this method. This method should log when a time step ends, and a
         # new one begins.
         # NOTE: Here is an opportunity for a stretch challenge!

@@ -3,6 +3,7 @@ random.seed(42)
 from person import Person
 from logger import Logger
 from virus import Virus
+import numpy as numpy
 
 
 class Simulation(object):
@@ -63,31 +64,41 @@ class Simulation(object):
         self.logger.write_metadata(pop_size, vacc_percentage, virus_name, mortality_rate)
         #self.time_step_counter
 
-    # def _create_population(self, initial_infected):
-    #     '''This method will create the initial population.
-    #         Args:
-    #             initial_infected (int): The number of infected people that the simulation
-    #             will begin with.
-    #
-    #         Returns:
-    #             list: A list of Person objects.
-    #
-    #     '''
-    #     # TODO: Finish this method!  This method should be called when the simulation
-    #     # begins, to create the population that will be used. This method should return
-    #     # an array filled with Person objects that matches the specifications of the
-    #     # simulation (correct number of people in the population, correct percentage of
-    #     # people vaccinated, correct number of initially infected people).
-    #
-    #     # Use the attributes created in the init method to create a population that has
-    #     # the correct intial vaccination percentage and initial infected.
-    #     population = []
-    #
-    #     for index in rango(0, pop_size):
-    #         vaccinated = False
-    #         vaccinated_pop = random.randint(0,pop_size-1)
-    #
-    #
+    def _create_population(self, initial_infected):
+        '''This method will create the initial population.
+            Args:
+                initial_infected (int): The number of infected people that the simulation
+                will begin with.
+    
+            Returns:
+                list: A list of Person objects.
+    
+        '''
+        # TODO: Finish this method!  This method should be called when the simulation
+        # begins, to create the population that will be used. This method should return
+        # an array filled with Person objects that matches the specifications of the
+        # simulation (correct number of people in the population, correct percentage of
+        # people vaccinated, correct number of initially infected people).
+    
+        # Use the attributes created in the init method to create a population that has
+        # the correct intial vaccination percentage and initial infected.
+        population = []
+        
+        number_vaccinated = round(self.vacc_percentage * self.pop_size)
+        is_vacc = numpy.random.choice(range(1, (self.pop_size) + 1), amount_vaccinated, replace=False)
+        is_infected = numpy.random.choice(range(1, (self.pop_size) + 1), inital_infected, replace=False)
+        
+        for index in range(self.pop_size):
+            vaccinated = False
+            vacc_pop = random.randint(0,pop_size-1)
+            person = Person(i+1, False, None
+            self.population.append(person))
+            if (vacc_pop <= pop_size * vacc_percentage):
+                vaccinated = True
+            if (is_infected )
+    
+        return population
+    
 
 
     def _simulation_should_continue(self):
@@ -117,13 +128,17 @@ class Simulation(object):
         # HINT: You may want to call the logger's log_time_step() method at the end of each time step.
         # TODO: Set this variable using a helper
         time_step_counter = 0
-        should_continue = None
+        should_continue = True
+        self.population = self._create_population(self.inital_infected, self.pop_size, self.vacc_percentage)
 
         while should_continue:
         # TODO: for every iteration of this loop, call self.time_step() to compute another
         # round of this simulation.
-            print('The simulation has ended after {time_step_counter} turns.'.format(time_step_counter))
-        pass
+            time_step_counter +=1
+            self.time_step()
+            should_continue = self._simulation_should_continue()
+        print('The simulation has ended after {time_step_counter} turns.'.format(time_step_counter))
+        
 
     def time_step(self):
         ''' This method should contain all the logic for computing one time step

@@ -3,7 +3,6 @@ random.seed(42)
 from person import Person
 from logger import Logger
 from virus import Virus
-import numpy as numpy
 
 
 class Simulation(object):
@@ -69,28 +68,26 @@ class Simulation(object):
             Args:
                 initial_infected (int): The number of infected people that the simulation
                 will begin with.
-    
+
             Returns:
                 list: A list of Person objects.
-    
+
         '''
         # TODO: Finish this method!  This method should be called when the simulation
         # begins, to create the population that will be used. This method should return
         # an array filled with Person objects that matches the specifications of the
         # simulation (correct number of people in the population, correct percentage of
         # people vaccinated, correct number of initially infected people).
-    
+
         # Use the attributes created in the init method to create a population that has
         # the correct intial vaccination percentage and initial infected.
+
         population = []
-        
-        number_vaccinated = round(self.vacc_percentage * self.pop_size)
-        is_vacc = numpy.random.choice(range(1, (self.pop_size) + 1), amount_vaccinated, replace=False)
-        is_infected = numpy.random.choice(range(1, (self.pop_size) + 1), inital_infected, replace=False)
-        
-        for index in range(self.pop_size):
+
+        for index in range(pop_size):
             vaccinated = False
             vacc_pop = random.randint(0,pop_size-1)
+<<<<<<< HEAD
             person = Person(i+1, False, None)
             self.population.append(person)
             if (vacc_pop <= pop_size * vacc_percentage):
@@ -100,6 +97,12 @@ class Simulation(object):
     
         return population
     
+=======
+            if(vacc_pop <= pop_size
+
+            population.append(Person(index,vaccinated))
+
+>>>>>>> c21f46268fa7e97591a22a490dd2ce992e07456e
 
 
     def _simulation_should_continue(self):
@@ -129,17 +132,13 @@ class Simulation(object):
         # HINT: You may want to call the logger's log_time_step() method at the end of each time step.
         # TODO: Set this variable using a helper
         time_step_counter = 0
-        should_continue = True
-        self.population = self._create_population(self.inital_infected, self.pop_size, self.vacc_percentage)
+        should_continue = None
 
         while should_continue:
         # TODO: for every iteration of this loop, call self.time_step() to compute another
         # round of this simulation.
-            time_step_counter +=1
-            self.time_step()
-            should_continue = self._simulation_should_continue()
-        print('The simulation has ended after {time_step_counter} turns.'.format(time_step_counter))
-        
+            print('The simulation has ended after {time_step_counter} turns.'.format(time_step_counter))
+        pass
 
     def time_step(self):
         ''' This method should contain all the logic for computing one time step

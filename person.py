@@ -36,7 +36,7 @@ class Person(object):
                     self.infection = None
                     return True
         # TODO:  Finish this method. Should return a Boolean
-        pass
+        
 
 
 ''' These are simple tests to ensure that you are instantiating your Person class correctly. '''

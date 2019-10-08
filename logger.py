@@ -62,7 +62,7 @@ class Logger(object):
 
         #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         #Case responces: is vacc, is already infected, is infected, is not infected
-        with open(self.log.txt, "a") as logs:
+        with open(self.log.txt, "a") as log:
             #1: person infected random_person.
             if random_person_sick == False and not random_person_vacc:
                 did_infect == True
@@ -90,11 +90,6 @@ class Logger(object):
 
 
 
-
-        #4: person didn't infect random_person just cause.
-        #add booleans
-
-
     def log_infection_survival(self, person, did_die_from_infection):
         ''' The Simulation object uses this method to log the results of every
         call of a Person object's .resolve_infection() method.
@@ -107,7 +102,13 @@ class Logger(object):
         # Append the results of the infection to the logfile
 
         #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        with open(self.log.txt, "a") as log:
+        
+        if did_die_from_infection == True:
+            print(f"{person} died.")
         # is dead = person died
+        elif did_die_from_infection == False:
+            print (f"{person} lived.")
         # in not dead = survived infection
         pass
 

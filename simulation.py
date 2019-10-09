@@ -94,11 +94,13 @@ class Simulation(object):
             self.population.append(person)
             if (vacc_pop <= pop_size * vacc_percentage):
                 vaccinated = True
-            else vaccinated = False
+            else: 
+                vaccinated = False
                 self.is_vacc.append(person)
             if (is_infected >= pop_size * vacc_percentage):
                 infected = True
-                else infected = False
+            else: 
+                infected = False
                 self.is_infected.append(person)
 
         return population
@@ -194,7 +196,18 @@ class Simulation(object):
             #     Simulation object's newly_infected array, so that their .infected
             #     attribute can be changed to True at the end of the time step.
         # TODO: Call slogger method during this method.
-        pass
+        infected = True
+        if random_person.is_vacc == True:
+            infected = False
+        elif random_person.virus != None:
+            infected = False
+        else:
+            infection_rng = random.random()
+            if infection_rng > self.virus.repro_rate:
+                infected = False
+                
+        if (infected):
+            self.newly_infected.append(random_person._id)
 
     def _infect_newly_infected(self):
         ''' This method should iterate through the list of ._id stored in self.newly_infected
@@ -202,7 +215,9 @@ class Simulation(object):
         # TODO: Call this method at the end of every time step and infect each Person.
         # TODO: Once you have iterated through the entire list of self.newly_infected, remember
         # to reset self.newly_infected back to an empty list.
-        pass
+        for _id in self.newly_infected:
+            self.poplulation[_id].virus = self.virus
+        self.newly_infected = []
 
 
 if __name__ == "__main__":

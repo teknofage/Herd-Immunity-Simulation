@@ -63,7 +63,7 @@ class Simulation(object):
 # def write_metadata(self, pop_size, vacc_percentage, virus_name, mortality_rate,
                     #    basic_repro_num):
         repro_rate = self.virus.repro_rate
-        self.logger.write_metadata(pop_size, vacc_percentage, virus, mortality_rate, repro_rate)
+        self.logger.write_metadata(pop_size, vacc_percentage, virus.name, mortality_rate, repro_rate)
         self.population = self._create_population(initial_infected) # List of Person objects
         #self.time_step_counter
 
@@ -88,7 +88,7 @@ class Simulation(object):
         population = []
 
         number_vaccinated = round(self.vacc_percentage * self.pop_size)
-        is_vacc = random.choice(range(1, (self.pop_size) + 1), amount_vaccinated, replace=False)
+        is_vacc = random.choice(range(1, (self.pop_size) + 1), vacc_percentage, replace=False)
         is_infected = random.choice(range(1, (self.pop_size) + 1), inital_infected, replace=False)
 
         for index in range(self.pop_size):

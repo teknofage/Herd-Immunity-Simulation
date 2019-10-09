@@ -47,9 +47,8 @@ class Simulation(object):
         self.logger = Logger('log.txt')
         self.vacc_pop = []
         self.unvacc_pop = []
-        self.totalvacc = int(vacc_percentage*self.pop_size)
-        self.population = self._create_population(initial_infected) # List of Person objects
         self.pop_size = pop_size # Int
+        self.totalvacc = int(vacc_percentage*self.pop_size)
         self.next_person_id = 0 # Int
         self.virus = virus # Virus object
         self.initial_infected = initial_infected # Int
@@ -58,10 +57,14 @@ class Simulation(object):
         self.vacc_percentage = vacc_percentage # float between 0 and 1
         self.total_dead = 0 # Int
         self.file_name = "{}_simulation_pop_{}_vp_{}_infected_{}.txt".format(
-            virus_name, population_size, vacc_percentage, initial_infected)
+            virus_name, pop_size, vacc_percentage, initial_infected)
         self.newly_infected = []
         self._infect_newly_infected()
-        self.logger.write_metadata(pop_size, vacc_percentage, virus_name, mortality_rate)
+# def write_metadata(self, pop_size, vacc_percentage, virus_name, mortality_rate,
+                    #    basic_repro_num):
+        repro_rate = self.virus.repro_rate
+        self.logger.write_metadata(pop_size, vacc_percentage, virus, mortality_rate, repro_rate)
+        self.population = self._create_population(initial_infected) # List of Person objects
         #self.time_step_counter
 
     def _create_population(self, initial_infected):
@@ -222,7 +225,7 @@ class Simulation(object):
 if __name__ == "__main__":
     params = sys.argv[1:]
     virus_name = str(params[0])
-    repro_num = float(params[1])
+    repro_rate = float(params[1])
     mortality_rate = float(params[2])
 
     pop_size = int(params[3])
@@ -233,7 +236,7 @@ if __name__ == "__main__":
     else:
         initial_infected = 1
 
-    virus = Virus(name, repro_rate, mortality_rate)
+    virus = Virus(virus_name, repro_rate, mortality_rate)
     sim = Simulation(pop_size, vacc_percentage, virus, initial_infected)
 
     sim.run()

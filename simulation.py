@@ -3,8 +3,7 @@ random.seed(42)
 from person import Person
 from logger import Logger
 from virus import Virus
-import numpy as numpy
-#Dont call me fat.
+
 
 
 class Simulation(object):
@@ -15,7 +14,7 @@ class Simulation(object):
     population that are vaccinated, the size of the population, and the amount of initially
     infected people in a population are all variables that can be set when the program is run.
     '''
-    def __init__(self, pop_size, vacc_percentage, initial_infected=1, virus):
+    def __init__(self, pop_size, vacc_percentage, virus, initial_infected=1):
         ''' Logger object logger records all events during the simulation.
         Population represents all Persons in the population.
         The next_person_id is the next available id for all created Persons,
@@ -86,8 +85,8 @@ class Simulation(object):
         population = []
 
         number_vaccinated = round(self.vacc_percentage * self.pop_size)
-        is_vacc = numpy.random.choice(range(1, (self.pop_size) + 1), amount_vaccinated, replace=False)
-        is_infected = numpy.random.choice(range(1, (self.pop_size) + 1), inital_infected, replace=False)
+        is_vacc = random.choice(range(1, (self.pop_size) + 1), amount_vaccinated, replace=False)
+        is_infected = random.choice(range(1, (self.pop_size) + 1), inital_infected, replace=False)
 
         for index in range(self.pop_size):
             person = Person(i+1, False, None)
@@ -235,6 +234,6 @@ if __name__ == "__main__":
         initial_infected = 1
 
     virus = Virus(name, repro_rate, mortality_rate)
-    sim = Simulation(pop_size, vacc_percentage, initial_infected, virus)
+    sim = Simulation(pop_size, vacc_percentage, virus, initial_infected)
 
     sim.run()

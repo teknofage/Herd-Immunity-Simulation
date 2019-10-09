@@ -3,6 +3,7 @@ random.seed(42)
 from person import Person
 from logger import Logger
 from virus import Virus
+from uuid import uuid4 #universal unique indentifier
 
 
 
@@ -45,8 +46,10 @@ class Simulation(object):
         # At the end of each time step, call self._infect_newly_infected()
         # and then reset .newly_infected back to an empty list.
         self.logger = Logger('log.txt')
+        self.norm_pop = []
         self.vacc_pop = []
         self.unvacc_pop = []
+        self.infected_pop = []
         self.pop_size = pop_size # Int
         self.totalvacc = int(vacc_percentage*self.pop_size)
         self.next_person_id = 0 # Int
@@ -87,23 +90,23 @@ class Simulation(object):
         # the correct intial vaccination percentage and initial infected.
         population = []
 
-        number_vaccinated = round(self.vacc_percentage * self.pop_size)
-        is_vacc = random.choice(range(1, (self.pop_size) + 1), vacc_percentage, replace=False)
-        is_infected = random.choice(range(1, (self.pop_size) + 1), inital_infected, replace=False)
+#create 3 for loops, one for each type of person
+        for _ in range(self.pop_size - self.totalvacc - initial_infected):
+            person = Person(uuid4(), False)
+            self.unvacc_pop.append(person)
+            population.append(norm_person)
 
-        for index in range(self.pop_size):
-            person = Person(i+1, False, None)
-            self.population.append(person)
-            if (vacc_pop <= pop_size * vacc_percentage):
-                vaccinated = True
-            else: 
-                vaccinated = False
-                self.is_vacc.append(person)
-            if (is_infected >= pop_size * vacc_percentage):
-                infected = True
-            else: 
-                infected = False
-                self.is_infected.append(person)
+        for _ in range(self.totalvacc):
+            vacc_person = Person(uuid(), True)
+            population.append(vacc_person)
+            self.vacc_pop.append(vacc_person)
+        
+        for _ in range(self.initial_infected):
+            infected = Person(uuid4(), False, self.virus)
+            population.append(infected)
+            self.infected_pop.append(infected)
+        
+        
 
         return population
 

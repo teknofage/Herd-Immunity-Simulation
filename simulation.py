@@ -101,13 +101,13 @@ class Simulation(object):
             vacc_person = Person(uuid4(), True)
             population.append(vacc_person)
             self.vacc_pop.append(vacc_person)
-        
+
         for _ in range(self.initial_infected):
             infected = Person(uuid4(), False, self.virus)
             population.append(infected)
             self.infected_pop.append(infected)
-        
-        
+
+
 
         return population
 
@@ -149,10 +149,10 @@ class Simulation(object):
         # round of this simulation.
             self.time_step()
             self.logger.log_time_step(self.time_step_counter)
-            
+
             should_continue = self._simulation_should_continue()
-            
-            
+
+
         print('The simulation has ended after {time_step_counter} turns.'.format(self.time_step_counter))
 
 
@@ -168,13 +168,19 @@ class Simulation(object):
             3. Otherwise call simulation.interaction(person, random_person) and
                 increment interaction counter by 1.
             '''
-        # TODO: Finish this method.
+            #each infected person has 100 interactions of rand person. 4 possible outcomes
+            #Infect person, dont infect person, person already infected, already vacced.
+            #state changes: if infected -> die or recover. if uninfected -> could become infected or not.
+            #mortality_rate detemins state change
+            #if infected and did not die you become vacced
+            #interactions and state changes are logged.
+            #time step happends after state changes are logged.
+            #checks if 100 interactions or if everyone has died.
+            #full stop
         for person in self.population:
-            print("boobies")
+            print(f"Person Infection: {person.infection}. Person Is Alive: {person.is_alive}")
             if person.infection and person.is_alive:
-                print("boobies")
                 interactions = 0
-                print("infecteddsf")
                 while interactions < 100:
                     rng = random.randint(0, self.pop_size)
                     if self.population[rng].is_alive == True:
@@ -182,7 +188,7 @@ class Simulation(object):
                         self.time_step_counter +=1
                         self.interaction(infected, self.population[rng])
         print(self.time_step_counter)
-        
+
 
     def interaction(self, person, random_person):
         '''This method should be called any time two living people are selected for an
@@ -218,7 +224,7 @@ class Simulation(object):
             infection_rng = random.random()
             if infection_rng > self.virus.repro_rate:
                 infected = False
-                
+
         if (infected):
             self.newly_infected.append(random_person._id)
 

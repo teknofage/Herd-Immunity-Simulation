@@ -169,9 +169,10 @@ class Simulation(object):
                 increment interaction counter by 1.
             '''
         # TODO: Finish this method.
-        for infected in self.population:
-            
-            if infected.infection != None:
+        for person in self.population:
+            print("boobies")
+            if person.infection and person.is_alive:
+                print("boobies")
                 interactions = 0
                 print("infecteddsf")
                 while interactions < 100:

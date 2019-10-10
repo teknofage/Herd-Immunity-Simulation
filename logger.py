@@ -12,7 +12,7 @@ class Logger(object):
     def __init__(self, file_name):
         # TODO:  Finish this initialization method. The file_name passed should be the
         # full file name of the file that the logs will be written to.
-        self.file_name = None
+        self.file_name = file_name
 
     def write_metadata(self, pop_size, vacc_percentage, virus_name, mortality_rate,
                        repro_rate):
@@ -62,23 +62,23 @@ class Logger(object):
 
         #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         #Case responces: is vacc, is already infected, is infected, is not infected
-        with open(self.log.txt, "a") as log:
+        with open(self.file_name, "a") as log:
             #1: person infected random_person.
             if random_person_sick == False and not random_person_vacc:
                 did_infect == True
                 random_person_sick == True
-                print(f"{random_person} got infected by {person}")
+                print(f"{random_person} got infected by {person}. \n")
 
             #2: person didn't infect random_person because they are is_vaccinated.
             elif random_person_vacc == True:
-                print(f"{person} did not infect {random_person} because they are vaccinated")
+                print(f"{person} did not infect {random_person} because they are vaccinated. \n")
                 did_infect == False
                 random_person_sick == False
 
             #3: person didn't infect random_person because they were already infected.
 
             elif random_person_vacc == True:
-                print(f"{person} did not infect {random_person} because they are already infected")
+                print(f"{person} did not infect {random_person} because they are already infected. \n")
                 did_infect == False
                 random_person_sick == True
 
@@ -86,7 +86,7 @@ class Logger(object):
             elif random_person_vacc == False and random_person:
                 did_infect == False
                 random_person_sick == False
-                print(f"{random_person} did not get infected.")
+                print(f"{random_person} did not get infected. \n")
 
 
 
@@ -102,17 +102,19 @@ class Logger(object):
         # Append the results of the infection to the logfile
 
         #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        with open(self.log.txt, "a") as log:
+        with open(self.file_name, "a") as log:
 
             if did_die_from_infection == True:
                 print(f"{person} died.")
+                log.write(f"{person} died. \n")
         # is dead = person died
             elif did_die_from_infection == False:
                 print (f"{person} lived.")
+                log.write(f"{person} lived. \n")
         # in not dead = survived infection
         
 
-    # def log_time_step(self, time_step_number):
+    def log_time_step(self, time_step_number):
     #     ''' STRETCH CHALLENGE DETAILS:
     #
     #     If you choose to extend this method, the format of the summary statistics logged
@@ -130,4 +132,6 @@ class Logger(object):
         # TODO: Finish this method. This method should log when a time step ends, and a
         # new one begins.
         # NOTE: Here is an opportunity for a stretch challenge!
-        pass
+        with open(self.file_name, "a") as log:
+            print(f"{time_step_number}")
+            log.write(f"{time_step_number} \n")

@@ -54,14 +54,15 @@ class Simulation(object):
         self.totalvacc = int(vacc_percentage*self.pop_size)
         self.next_person_id = 0 # Int
         self.virus = virus # Virus object
+        self.newly_infected = []
         self.initial_infected = initial_infected # Int
         self.total_infected = initial_infected # Int
-        self.current_infected = self.initial_infected # Int  # <--What is going on here?
+        self.current_infected = self.initial_infected
         self.vacc_percentage = vacc_percentage # float between 0 and 1
         self.total_dead = 0 # Int
         self.file_name = "{}_simulation_pop_{}_vp_{}_infected_{}.txt".format(
             virus_name, pop_size, vacc_percentage, initial_infected)
-        self.newly_infected = []
+        
         self.time_step_counter = 0
         self._infect_newly_infected()
 # def write_metadata(self, pop_size, vacc_percentage, virus_name, mortality_rate,
@@ -103,9 +104,9 @@ class Simulation(object):
             self.vacc_pop.append(vacc_person)
         
         for _ in range(self.initial_infected):
-            infected = Person(uuid4(), False, self.virus)
-            population.append(infected)
-            self.infected_pop.append(infected)
+            self.infected = Person(uuid4(), False, self.virus)
+            population.append(current_infected)
+            self.infected_pop.append(current_infected)
         
         
 
@@ -122,7 +123,7 @@ class Simulation(object):
                 bool: True for simulation should continue, False if it should end.
         '''
         # TODO: Complete this helper method.  Returns a Boolean.
-        if self.pop_size == 0 or self.vacc_percentage == 100:
+        if self.pop_size == 0 or self.vacc_percentage == 100 or self.current_infected == 0:
             should_continue = False
         else:
             should_continue = True
@@ -140,8 +141,10 @@ class Simulation(object):
         # TODO: Keep track of the number of time steps that have passed.
         # HINT: You may want to call the logger's log_time_step() method at the end of each time step.
         # TODO: Set this variable using a helper
-        #time_step_counter = 0
+        time_step_counter = 0
         should_continue = True
+        self.logger.write_metadata(self.pop_size, self.vacc_percentage, self.virus_name, self.virus.mortality_rate, self.virus.repro_rate)
+
         self.population = self._create_population(self.initial_infected)
 
         while should_continue:
@@ -154,7 +157,8 @@ class Simulation(object):
             
             
         print('The simulation has ended after {time_step_counter} turns.'.format(self.time_step_counter))
-
+        print('The starting pop was {self.pop_size}. {self.total_dead} amount of people died.'.format(self.pop_size, self.total_dead))
+        
 
     def time_step(self):
         ''' This method should contain all the logic for computing one time step
@@ -168,15 +172,15 @@ class Simulation(object):
             3. Otherwise call simulation.interaction(person, random_person) and
                 increment interaction counter by 1.
             '''
+            
         # TODO: Finish this method.
         for person in self.population:
-            print("boobies")
-            if person.infection and person.is_alive:
-                print("boobies")
+            print(f"Person Infection: {person.infection}. Person Is Alive: {person.is_alive}")
+            if person.infection == None and person.is_alive:
                 interactions = 0
-                print("infecteddsf")
+                
                 while interactions < 100:
-                    rng = random.randint(0, self.pop_size)
+                    rng = random.randint(0, self.pop_size - 1)
                     if self.population[rng].is_alive == True:
                         interactions +=1
                         self.time_step_counter +=1
